@@ -1,0 +1,19 @@
+---
+- hosts: slave
+  become: yes
+  name: Play
+  tasks: 
+    - name: Execute command 'Date'
+    - command: date
+    - name: Execute Script on Server
+    - script: slave1_script.sh 
+- hosts: slave2
+  become: yes
+  name: Play2
+  tasks:
+    - name: Execute on Slave2 Server
+    - script: slave2_script.sh
+    - name: Run Repo Update
+    - command : sudo apt update
+    - name: Install bginx
+    - apt: name=nginx state=latest
